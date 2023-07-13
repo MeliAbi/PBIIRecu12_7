@@ -1,5 +1,6 @@
 package sistemaSeguro;
 
+import java.util.ArrayList;
 
 public class UsuarioBasico extends Usuario implements Bloqueable, Eliminable{
 
@@ -41,7 +42,31 @@ public class UsuarioBasico extends Usuario implements Bloqueable, Eliminable{
 	public void setEliminado(Boolean eliminado) {
 		this.eliminado = eliminado;
 	}
-
+	
+	public Boolean contraseñaValida() {
+		
+		Boolean res = false;
+		int largo = contrasenia.length();
+		Boolean cn = false;
+		Boolean cmay = false;
+		Boolean cmin = false;
+		
+		for(int i=0; i<largo;i++) {
+			if((contrasenia.charAt(i)>=48 && contrasenia.charAt(i)<=57)) {
+				cn=true;
+			}
+			else if((contrasenia.charAt(i)>=65 && contrasenia.charAt(i)<=90)) {
+				cmay=true;
+			}
+			else if((contrasenia.charAt(i)>=97 && contrasenia.charAt(i)<=122)) {
+				cmin=true;
+			}
+		}
+		if(cn&&cmay&&cmin) {
+			res = true;
+		};
+		return res;
+	}
 
 
 	@Override

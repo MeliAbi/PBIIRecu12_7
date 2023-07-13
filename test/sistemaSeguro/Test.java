@@ -168,12 +168,26 @@ public class Test {
 
 	}
 	
+	@org.junit.Test
+	public void queLaContraseñaSeaValidaParaUsuarioBasico() {
+		Sistema sistema = new Sistema("Nombre del Sistema");
+		String usuario2= "martita99";
+		String contra2= "Martita12";
+		
+		Usuario marta = new UsuarioBasico(usuario2,contra2);
+		
+		sistema.agregarUsuario(marta);
+		
+		assertEquals(true,((UsuarioBasico)sistema.buscarUsuario(usuario2)).contraseñaValida());
+
+	}
+	
 	/*
 9.	Los requisitos de las contraseñas varían entre los usuarios Básicos y los usuarios Administradores.
  	Los usuarios básicos deben tener contraseñas que contengan al menos un número y una minúscula y 
  	una mayúscula. Los usuarios administradores además de los requisitos de la contraseña de los usuarios
  	 básicos deben tener un carácter especial y no puede tener secuencia de más de 3 caracteres seguidos 
- 	 (123 y abc es válido, pero 1234 o abcd no). 
+ 	 (123 y abc es válido, pero 1234 o abcd no)
 10.	Intentar generar un usuario con una contraseña inválida debe arrojar la excepción unlam.pb2.InvalidPassword
 
 	 */
