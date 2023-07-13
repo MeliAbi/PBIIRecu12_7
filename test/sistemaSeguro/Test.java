@@ -71,7 +71,8 @@ public class Test {
 		} catch (UserNotFound e) {
 			throw new unlam.pb2.UserNotFound(e.getMessage());
 		}
-		((UsuarioBasico)sistema.buscarUsuario(usuario2)).eliminarUsuario();
+
+		sistema.eliminarUsuario(usuario2);
 		
 		assertEquals(false,((UsuarioBasico)sistema.buscarUsuario(usuario1)).getBloqueado());
 		assertEquals(true,((UsuarioBasico)sistema.buscarUsuario(usuario2)).getEliminado());
@@ -138,6 +139,7 @@ public class Test {
 		try {
 			sistema.ingresarUsuario(usuario2, contra2);
 		} catch (UserNotFound e) {
+			System.out.println(e.getMessage());
 			throw new unlam.pb2.UserNotFound(e.getMessage());
 		}
 		
@@ -145,8 +147,28 @@ public class Test {
 		
 	}
 	
+	@org.junit.Test (expected=ClassCastException.class)
+	public void queSeIntenteEliminarUnNoEliminable() throws ClassCastException {
+		Sistema sistema = new Sistema("Nombre del Sistema");
+		String usuario2= "martita99";
+		String contra2= "martita99";
+		
+		Usuario marta = new UsuarioAdministrador(usuario2,contra2);
+		
+		sistema.agregarUsuario(marta);
+		
+		try {
+			sistema.eliminarUsuario(usuario2);
+		} catch (ClassCastException e) {
+			System.out.println(e.getMessage());
+			throw new java.lang.ClassCastException(e.getMessage());
+		}
+		
+		assertEquals(1,sistema.getUsuarios().size());
+
+	}
+	
 	/*
-	Si se intenta eliminar un usuario que no sea Eliminable se debe arrojar la excepción java.lang.ClassCastException.
 9.	Los requisitos de las contraseñas varían entre los usuarios Básicos y los usuarios Administradores.
  	Los usuarios básicos deben tener contraseñas que contengan al menos un número y una minúscula y 
  	una mayúscula. Los usuarios administradores además de los requisitos de la contraseña de los usuarios

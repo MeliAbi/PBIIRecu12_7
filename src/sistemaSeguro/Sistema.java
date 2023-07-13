@@ -33,6 +33,17 @@ public class Sistema {
 		
 	}
 	
+	public void eliminarUsuario(String nom) throws ClassCastException{
+		
+		if(buscarUsuario(nom) instanceof UsuarioBasico && buscarUsuario(nom)!=null) {
+			((UsuarioBasico)buscarUsuario(nom)).eliminarUsuario();
+		}else if (buscarUsuario(nom) instanceof UsuarioAdministrador && buscarUsuario(nom)!=null){
+			throw new java.lang.ClassCastException("No se puede eliminar este usuario");
+		}
+			
+		
+	}
+	
 	public Usuario buscarUsuario(String nomUsuario) {
 		Usuario user=null;
 		
@@ -51,11 +62,11 @@ public class Sistema {
 		if(user instanceof UsuarioBasico) {
 			Integer cant = ((UsuarioBasico)user).getCantIntentos()+1;
 			
-			if(user!=null && user.getContraseña()==contraseña && cant<3){
+			if(user!=null && user.getContrasenia()==contraseña && cant<3){
 				System.out.println("Se ingresó exitosamente");
-			}else if(user!=null && user.getContraseña()!=contraseña && cant<3) {
+			}else if(user!=null && user.getContrasenia()!=contraseña && cant<3) {
 				((UsuarioBasico)user).setCantIntentos(cant);
-			}else if(user!=null && user.getContraseña()!=contraseña && cant>=3) {
+			}else if(user!=null && user.getContrasenia()!=contraseña && cant>=3) {
 				((UsuarioBasico) user).setBloqueado(true);
 			}
 		}

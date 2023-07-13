@@ -1,5 +1,6 @@
 package sistemaSeguro;
 
+
 public class UsuarioBasico extends Usuario implements Bloqueable, Eliminable{
 
 	private Integer cantIntentos; 
@@ -10,6 +11,7 @@ public class UsuarioBasico extends Usuario implements Bloqueable, Eliminable{
 		super(usuario, contraseña);
 		this.cantIntentos=0;
 		this.bloqueado=false;
+		this.eliminado=false;
 	}
 
 	
@@ -39,6 +41,7 @@ public class UsuarioBasico extends Usuario implements Bloqueable, Eliminable{
 	public void setEliminado(Boolean eliminado) {
 		this.eliminado = eliminado;
 	}
+
 
 
 	@Override

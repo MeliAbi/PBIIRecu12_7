@@ -4,12 +4,12 @@ import java.util.Objects;
 
 public class Usuario implements Comparable <Usuario>{
 	
-	private String usuario="";
-	private String contraseña="";
+	protected String usuario="";
+	protected String contrasenia="";
 
 	public Usuario(String usuario,String contraseña) {
 		this.usuario=usuario;
-		this.contraseña=contraseña;
+		this.contrasenia=contraseña;
 	}
 
 	public String getUsuario() {
@@ -22,12 +22,12 @@ public class Usuario implements Comparable <Usuario>{
 
 	
 	
-	public String getContraseña() {
-		return contraseña;
+	public String getContrasenia() {
+		return contrasenia;
 	}
 
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setContrasenia(String contraseña) {
+		this.contrasenia = contraseña;
 	}
 
 	@Override
